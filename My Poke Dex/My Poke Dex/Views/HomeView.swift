@@ -9,8 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        Text("Home")
-            
+        NavigationView {
+            ZStack {
+                Color.red
+            }
+            .navigationTitle("Home")
+        }
     }
 }
 

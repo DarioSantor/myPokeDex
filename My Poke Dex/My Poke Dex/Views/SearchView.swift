@@ -9,7 +9,12 @@ import SwiftUI
 
 struct SearchView: View {
     var body: some View {
-        Text("Search")
+        NavigationView {
+            ZStack {
+                Color.blue
+            }
+            .navigationTitle("Search")
+        }
     }
 }
 
