@@ -8,15 +8,44 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
-    let pokemon: PokemonEntry
-    
+    @StateObject var pokemonDetailVM = PokemonDetailViewModel()
+    var pokemon: Pokemon
     var body: some View {
         VStack {
-            PokemonImage(imageLink: "\(pokemon.url)")
-            
-            Text("\(pokemon.name)".capitalized)
-                .font(.title)
+            Text(pokemon.name.capitalized)
+                .font(.largeTitle)
+                .bold()
+            HStack {
+                VStack {
+                    Text(String(pokemonDetailVM.height))
+                        .font(.title)
+                        .bold()
+                    Text("Height")
+                        .bold()
+                        .foregroundColor(.red)
+                }
+                .padding()
+                VStack {
+                    Text(String(pokemonDetailVM.weight))
+                        .font(.title)
+                        .bold()
+                    Text("Weight")
+                        .bold()
+                        .foregroundColor(.red)
+                }
+                .padding()
+            }
+            .padding()
+        }
+        .task {
+            pokemonDetailVM.urlString = pokemon.url
+            await pokemonDetailVM.getData()
         }
     }
 }
 
+struct PokemonDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        PokemonDetailView(pokemon: Pokemon(name: "bulbasaur", url: "https://pokeapi.co/api/v2/pokemon/1/"))
+    }
+}

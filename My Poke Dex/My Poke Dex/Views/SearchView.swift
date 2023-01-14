@@ -8,29 +8,28 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State var pokemon = [PokemonEntry]()
     @StateObject var pokemonsVM = PokemonsViewModel()
     @State var searchText = ""
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(searchText == "" ? pokemon : pokemon.filter( {
-                    $0.name.contains(searchText.lowercased())
-                })) { entry in
+            List(pokemonsVM.pokemonsList, id: \.self) {
+                pokemon in
+                NavigationLink {
+                    PokemonDetailView(pokemon: pokemon)
+                } label: {
                     HStack {
-                        PokemonImage(imageLink: "\(entry.url)")
+                        PokemonImage(imageLink: "\(pokemon.url)")
                             .padding(.trailing, 20)
-                        NavigationLink("\(entry.name)".capitalized, destination: PokemonDetailView(pokemon: entry))
+                        Text(pokemon.name.capitalized)
+                            .font(.title2)
                     }
                 }
+                .searchable(text: $searchText)
             }
-            .onAppear {
-                PokeApi().getData() { pokemon in
-                    self.pokemon = pokemon
-                }
+            .task {
+                await pokemonsVM.getData()
             }
-            .searchable(text: $searchText)
             .navigationTitle("Search")
         }
     }

@@ -1,5 +1,5 @@
 //
-//  PokemonsViewModel.swift
+//  PokemonDetailViewModel.swift
 //  My Poke Dex
 //
 //  Created by Santos, Dario Ferreira on 14/01/2023.
@@ -8,17 +8,22 @@
 import Foundation
 
 @MainActor
-class PokemonsViewModel: ObservableObject {
+class PokemonDetailViewModel: ObservableObject {
     
     private struct Returned: Codable {
-        var count: Int
-        var next: String
-        var results: [Pokemon]
+        var height: Int
+        var weight: Int
+        var sprites: Sprite
     }
     
-    @Published var pokemonsList: [Pokemon] = []
-    @Published var urlString = "https://pokeapi.co/api/v2/pokemon?limit=151"
-    @Published var count = 0
+    struct Sprite: Codable {
+        var front_default: String
+    }
+    
+    var urlString = ""
+    @Published var height = 0
+    @Published var weight = 0
+    @Published var imageURL = ""
     
     func getData() async {
         guard let url = URL(string: urlString) else { return }
@@ -27,12 +32,14 @@ class PokemonsViewModel: ObservableObject {
             let (data, _) = try await URLSession.shared.data(from: url)
             
             guard let returned = try? JSONDecoder().decode(Returned.self, from: data) else { return }
-            self.count = returned.count
-            self.urlString = returned.next
-            self.pokemonsList = returned.results
+            
+            self.height = returned.height
+            self.weight = returned.weight
+            self.imageURL = returned.sprites.front_default
             
         } catch {
             print("ERROR: No data from URL")
         }
     }
 }
+

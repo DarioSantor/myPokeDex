@@ -15,6 +15,7 @@ struct PokemonSprites: Codable {
     var front_default: String?
 }
 
+@MainActor
 class PokemonImageSelectedApi {
     func getData(url: String, completion: @escaping (PokemonSprites) -> ()) {
         guard let url = URL(string: url) else { return }
