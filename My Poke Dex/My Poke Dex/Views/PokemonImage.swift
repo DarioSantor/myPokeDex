@@ -25,13 +25,13 @@ struct PokemonImage: View {
                 }
             }
             .clipShape(Circle())
-            .foregroundColor(Color.gray.opacity(0.60))
+            .foregroundColor(Color.gray.opacity(0.90))
     }
     
     func getSprite(url: String) {
         var tempSprite: String?
         
-        PokemonSelectedApi().getData(url: url) { sprite in
+        PokemonImageSelectedApi().getData(url: url) { sprite in
             tempSprite = sprite.front_default
             self.pokemonSprite = tempSprite ?? "placeholder"
         }

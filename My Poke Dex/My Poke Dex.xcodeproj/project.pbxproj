@@ -11,12 +11,13 @@
 		F2118D6229707656000BBD95 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2118D6129707656000BBD95 /* ContentView.swift */; };
 		F2118D6429707658000BBD95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2118D6329707658000BBD95 /* Assets.xcassets */; };
 		F2118D6729707658000BBD95 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2118D6629707658000BBD95 /* Preview Assets.xcassets */; };
-		F2118D6F29707F54000BBD95 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2118D6E29707F54000BBD95 /* HomeView.swift */; };
 		F2118D7129707F65000BBD95 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2118D7029707F65000BBD95 /* SearchView.swift */; };
 		F2118D7329707F85000BBD95 /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2118D7229707F85000BBD95 /* FavouritesView.swift */; };
 		F2118D9329708BFD000BBD95 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2118D9229708BFD000BBD95 /* Pokemon.swift */; };
-		F299042F29716EFB00C04AE0 /* PokemonSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = F299042E29716EFB00C04AE0 /* PokemonSelected.swift */; };
+		F299042F29716EFB00C04AE0 /* PokemonImageSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = F299042E29716EFB00C04AE0 /* PokemonImageSelected.swift */; };
 		F29904312971747C00C04AE0 /* PokemonImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29904302971747C00C04AE0 /* PokemonImage.swift */; };
+		F29904372972BA4200C04AE0 /* PokemonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F29904362972BA4200C04AE0 /* PokemonDetailView.swift */; };
+		F2D6027529733DB800B36A99 /* PokemonsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D6027429733DB800B36A99 /* PokemonsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,12 +26,13 @@
 		F2118D6129707656000BBD95 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F2118D6329707658000BBD95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F2118D6629707658000BBD95 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		F2118D6E29707F54000BBD95 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		F2118D7029707F65000BBD95 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		F2118D7229707F85000BBD95 /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
 		F2118D9229708BFD000BBD95 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
-		F299042E29716EFB00C04AE0 /* PokemonSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonSelected.swift; sourceTree = "<group>"; };
+		F299042E29716EFB00C04AE0 /* PokemonImageSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonImageSelected.swift; sourceTree = "<group>"; };
 		F29904302971747C00C04AE0 /* PokemonImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonImage.swift; sourceTree = "<group>"; };
+		F29904362972BA4200C04AE0 /* PokemonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailView.swift; sourceTree = "<group>"; };
+		F2D6027429733DB800B36A99 /* PokemonsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +67,8 @@
 			children = (
 				F2118D5F29707656000BBD95 /* My_Poke_DexApp.swift */,
 				F2118D6D29707F29000BBD95 /* Views */,
-				F2118D9129708BE4000BBD95 /* Data */,
+				F2D6027329733D8D00B36A99 /* ViewModel */,
+				F2118D9129708BE4000BBD95 /* Model */,
 				F2118D6329707658000BBD95 /* Assets.xcassets */,
 				F2118D6529707658000BBD95 /* Preview Content */,
 			);
@@ -84,21 +87,29 @@
 			isa = PBXGroup;
 			children = (
 				F2118D6129707656000BBD95 /* ContentView.swift */,
-				F2118D6E29707F54000BBD95 /* HomeView.swift */,
 				F2118D7029707F65000BBD95 /* SearchView.swift */,
-				F2118D7229707F85000BBD95 /* FavouritesView.swift */,
 				F29904302971747C00C04AE0 /* PokemonImage.swift */,
+				F29904362972BA4200C04AE0 /* PokemonDetailView.swift */,
+				F2118D7229707F85000BBD95 /* FavouritesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		F2118D9129708BE4000BBD95 /* Data */ = {
+		F2118D9129708BE4000BBD95 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				F2118D9229708BFD000BBD95 /* Pokemon.swift */,
-				F299042E29716EFB00C04AE0 /* PokemonSelected.swift */,
+				F299042E29716EFB00C04AE0 /* PokemonImageSelected.swift */,
 			);
-			path = Data;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2D6027329733D8D00B36A99 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F2D6027429733DB800B36A99 /* PokemonsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,10 +183,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2118D7129707F65000BBD95 /* SearchView.swift in Sources */,
+				F29904372972BA4200C04AE0 /* PokemonDetailView.swift in Sources */,
 				F29904312971747C00C04AE0 /* PokemonImage.swift in Sources */,
-				F299042F29716EFB00C04AE0 /* PokemonSelected.swift in Sources */,
-				F2118D6F29707F54000BBD95 /* HomeView.swift in Sources */,
+				F299042F29716EFB00C04AE0 /* PokemonImageSelected.swift in Sources */,
 				F2118D7329707F85000BBD95 /* FavouritesView.swift in Sources */,
+				F2D6027529733DB800B36A99 /* PokemonsViewModel.swift in Sources */,
 				F2118D6229707656000BBD95 /* ContentView.swift in Sources */,
 				F2118D6029707656000BBD95 /* My_Poke_DexApp.swift in Sources */,
 				F2118D9329708BFD000BBD95 /* Pokemon.swift in Sources */,

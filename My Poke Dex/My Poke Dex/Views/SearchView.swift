@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     @State var pokemon = [PokemonEntry]()
+    @StateObject var pokemonsVM = PokemonsViewModel()
     @State var searchText = ""
     
     var body: some View {
@@ -20,7 +21,7 @@ struct SearchView: View {
                     HStack {
                         PokemonImage(imageLink: "\(entry.url)")
                             .padding(.trailing, 20)
-                        NavigationLink("\(entry.name)".capitalized, destination: Text("Detail view for \(entry.name)"))
+                        NavigationLink("\(entry.name)".capitalized, destination: PokemonDetailView(pokemon: entry))
                     }
                 }
             }
