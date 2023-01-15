@@ -20,15 +20,16 @@ struct PokemonDetailView: View {
                 image
                     .resizable()
                     .scaledToFit()
-                    .frame(maxHeight: 254)
+                    .frame(width: 254, height: 254)
                     .cornerRadius(16)
                     .shadow(radius: 8, x: 5, y: 5)
                     .overlay {
                         RoundedRectangle(cornerRadius: 16).opacity(0.1)
                     }
             } placeholder: {
-                RoundedRectangle(cornerRadius: 8)
-                    .foregroundColor(.clear)
+                Rectangle()
+                    .foregroundColor(.gray).opacity(0.1)
+                    .frame(width: 254, height: 254)
             }
 
             HStack {

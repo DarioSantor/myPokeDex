@@ -14,44 +14,54 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                List(0..<pokemonsVM.pokemonsList.count, id: \.self) { index in
+                List(searchResults) { pokemon in
                     LazyVStack {
                         NavigationLink {
-                            PokemonDetailView(pokemon: pokemonsVM.pokemonsList[index])
+                            PokemonDetailView(pokemon: pokemon)
                         } label: {
                             HStack {
-                                PokemonImage(imageLink: "\(pokemonsVM.pokemonsList[index].url)")
+                                PokemonImage(imageLink: "\(pokemon.url)")
                                     .padding(.trailing, 20)
-                                Text("#\(index+1)")
-                                    .foregroundColor(.gray)
-                                Text(pokemonsVM.pokemonsList[index].name.capitalized)
+                                Text(pokemon.name.capitalized)
                                     .font(.title2)
                             }
                         }
                     }
                     .onAppear {
-                        if let lastPokemon = pokemonsVM.pokemonsList.last {
-                            if pokemonsVM.pokemonsList[index].name == lastPokemon.name && pokemonsVM.urlString.hasPrefix("http") {
-                                Task {
-                                    await pokemonsVM.getData()
-                                }
-                            }
+                        Task {
+                            await pokemonsVM.loadNextIfNeeded(pokemon: pokemon)
                         }
                     }
                 }
                 if pokemonsVM.isLoading {
                     ProgressView()
-                        .tint(.red)
+                        .tint(.orange)
                         .scaleEffect(4)
                 }
-
             }
+            .searchable(text: $searchText)
             .task {
                 await pokemonsVM.getData()
             }
             .navigationTitle("MyPokeDex")
+            .toolbar {
+                ToolbarItem (placement: .navigationBarTrailing) {
+                    Button("Load all") {
+                        Task {
+                            await pokemonsVM.loadAll()
+                        }
+                    }
+                }
+            }
             }
         }
+    var searchResults: [Pokemon] {
+        if searchText.isEmpty {
+            return pokemonsVM.pokemonsList
+        } else {
+            return pokemonsVM.pokemonsList.filter { $0.name.capitalized.contains(searchText) }
+        }
+    }
     }
 
 

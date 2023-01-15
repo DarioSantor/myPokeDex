@@ -47,4 +47,23 @@ class PokemonsViewModel: ObservableObject {
             print("ERROR: No data from URL")
         }
     }
+    
+    func loadNextIfNeeded(pokemon: Pokemon) async {
+        guard let lastPokemon = pokemonsList.last else {
+            return
+        }
+        if pokemon.id == lastPokemon.id && urlString.hasPrefix("http") {
+                Task {
+                    await getData()
+                }
+            }
+    }
+    
+    func loadAll() async {
+        guard urlString.hasPrefix("http") else { return }
+        
+        await getData()
+        
+        await loadAll()
+    }
 }
