@@ -12,28 +12,48 @@ struct SearchView: View {
     @State var searchText = ""
     
     var body: some View {
-        NavigationView {
-            List(pokemonsVM.pokemonsList, id: \.self) {
-                pokemon in
-                NavigationLink {
-                    PokemonDetailView(pokemon: pokemon)
-                } label: {
-                    HStack {
-                        PokemonImage(imageLink: "\(pokemon.url)")
-                            .padding(.trailing, 20)
-                        Text(pokemon.name.capitalized)
-                            .font(.title2)
+        NavigationStack {
+            ZStack {
+                List(0..<pokemonsVM.pokemonsList.count, id: \.self) { index in
+                    LazyVStack {
+                        NavigationLink {
+                            PokemonDetailView(pokemon: pokemonsVM.pokemonsList[index])
+                        } label: {
+                            HStack {
+                                PokemonImage(imageLink: "\(pokemonsVM.pokemonsList[index].url)")
+                                    .padding(.trailing, 20)
+                                Text("#\(index+1)")
+                                    .foregroundColor(.gray)
+                                Text(pokemonsVM.pokemonsList[index].name.capitalized)
+                                    .font(.title2)
+                            }
+                        }
+                    }
+                    .onAppear {
+                        if let lastPokemon = pokemonsVM.pokemonsList.last {
+                            if pokemonsVM.pokemonsList[index].name == lastPokemon.name && pokemonsVM.urlString.hasPrefix("http") {
+                                Task {
+                                    await pokemonsVM.getData()
+                                }
+                            }
+                        }
                     }
                 }
-                .searchable(text: $searchText)
+                if pokemonsVM.isLoading {
+                    ProgressView()
+                        .tint(.red)
+                        .scaleEffect(4)
+                }
+
             }
             .task {
                 await pokemonsVM.getData()
             }
-            .navigationTitle("Search")
+            .navigationTitle("MyPokeDex")
+            }
         }
     }
-}
+
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {

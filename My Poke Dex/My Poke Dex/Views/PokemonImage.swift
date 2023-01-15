@@ -28,7 +28,8 @@ struct PokemonImage: View {
             .foregroundColor(Color.gray.opacity(0.90))
     }
     
-    @MainActor func getSprite(url: String) {
+    @MainActor 
+    func getSprite(url: String) {
         var tempSprite: String?
         
         PokemonImageSelectedApi().getData(url: url) { sprite in
