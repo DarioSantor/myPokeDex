@@ -11,8 +11,8 @@ import Foundation
 class PokemonDetailViewModel: ObservableObject {
     
     private struct Returned: Codable {
-        var height: Int
-        var weight: Int
+        var height: Int?
+        var weight: Int?
         var sprites: Sprite
     }
     
@@ -30,7 +30,7 @@ class PokemonDetailViewModel: ObservableObject {
     }
     
     struct OfficialArtwork: Codable {
-        var front_default: String
+        var front_default: String?
     }
     
     var urlString = ""
@@ -46,9 +46,9 @@ class PokemonDetailViewModel: ObservableObject {
             
             guard let returned = try? JSONDecoder().decode(Returned.self, from: data) else { return }
             
-            self.height = returned.height
-            self.weight = returned.weight
-            self.imageURL = returned.sprites.other.officialArtwork.front_default
+            self.height = returned.height ?? 0
+            self.weight = returned.weight ?? 0
+            self.imageURL = returned.sprites.other.officialArtwork.front_default ?? "n/a" 
             
         } catch {
             print("ERROR: No data from URL")

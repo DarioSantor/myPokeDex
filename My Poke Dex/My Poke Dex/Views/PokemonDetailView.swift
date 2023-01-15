@@ -12,25 +12,32 @@ struct PokemonDetailView: View {
     var pokemon: Pokemon
     var body: some View {
         VStack {
+            
+            AsyncImage(url: URL(string: pokemonDetailVM.imageURL)) { phase in
+                if let image = phase.image {
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 254, height: 254)
+                        .cornerRadius(16)
+                        .shadow(radius: 8, x: 5, y: 5)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 16).opacity(0.1)
+                        }
+                } else if phase.error != nil {
+                    Image(systemName: "questionmark.app.fill")
+                        .foregroundColor(.gray).opacity(0.1)
+                        .frame(width: 254, height: 254)
+                } else {
+                    Rectangle()
+                        .foregroundColor(.gray).opacity(0.1)
+                        .frame(width: 254, height: 254)
+                }
+            }
+            
             Text(pokemon.name.capitalized)
                 .font(.largeTitle)
                 .bold()
-            AsyncImage(url: URL(string: pokemonDetailVM.imageURL)) {
-                image in
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 254, height: 254)
-                    .cornerRadius(16)
-                    .shadow(radius: 8, x: 5, y: 5)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 16).opacity(0.1)
-                    }
-            } placeholder: {
-                Rectangle()
-                    .foregroundColor(.gray).opacity(0.1)
-                    .frame(width: 254, height: 254)
-            }
 
             HStack {
                 VStack {
