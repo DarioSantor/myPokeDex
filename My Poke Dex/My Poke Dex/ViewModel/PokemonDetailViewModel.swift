@@ -14,6 +14,11 @@ class PokemonDetailViewModel: ObservableObject {
         var height: Int?
         var weight: Int?
         var sprites: Sprite
+        let stats: [StatElement]
+    }
+    
+    struct StatElement: Codable {
+        let base_stat: Int
     }
     
     struct Sprite: Codable {
@@ -35,8 +40,9 @@ class PokemonDetailViewModel: ObservableObject {
     
     var urlString = ""
     @Published var height = 0
-    @Published var weight = 0
+    @Published var weight = 00
     @Published var imageURL = ""
+    @Published var stats = [StatElement(base_stat: 0), StatElement(base_stat: 0), StatElement(base_stat: 0)]
     
     func getData() async {
         guard let url = URL(string: urlString) else { return }
@@ -48,7 +54,8 @@ class PokemonDetailViewModel: ObservableObject {
             
             self.height = returned.height ?? 0
             self.weight = returned.weight ?? 0
-            self.imageURL = returned.sprites.other.officialArtwork.front_default ?? "n/a" 
+            self.imageURL = returned.sprites.other.officialArtwork.front_default ?? "n/a"
+            self.stats = returned.stats
             
         } catch {
             print("ERROR: No data from URL")

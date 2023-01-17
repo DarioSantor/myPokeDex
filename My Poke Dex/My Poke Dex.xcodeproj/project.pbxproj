@@ -90,10 +90,8 @@
 			children = (
 				F2118D6129707656000BBD95 /* ContentView.swift */,
 				F2118D7029707F65000BBD95 /* SearchView.swift */,
-				F29904302971747C00C04AE0 /* PokemonImage.swift */,
 				F29904362972BA4200C04AE0 /* PokemonDetailView.swift */,
 				F2118D7229707F85000BBD95 /* FavouritesView.swift */,
-				F2D60276297347D900B36A99 /* Pokemon.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -101,6 +99,7 @@
 		F2118D9129708BE4000BBD95 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F2D60276297347D900B36A99 /* Pokemon.swift */,
 				F299042E29716EFB00C04AE0 /* PokemonImageSelected.swift */,
 			);
 			path = Model;
@@ -109,6 +108,7 @@
 		F2D6027329733D8D00B36A99 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F29904302971747C00C04AE0 /* PokemonImage.swift */,
 				F2D6027429733DB800B36A99 /* PokemonsViewModel.swift */,
 				F2D6027829734FA000B36A99 /* PokemonDetailViewModel.swift */,
 			);

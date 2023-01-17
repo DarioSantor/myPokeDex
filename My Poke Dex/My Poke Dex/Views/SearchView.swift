@@ -36,7 +36,7 @@ struct SearchView: View {
                 if pokemonsVM.isLoading {
                     ProgressView()
                         .tint(.orange)
-                        .scaleEffect(4)
+                        .scaleEffect(3)
                 }
             }
             .searchable(text: $searchText)

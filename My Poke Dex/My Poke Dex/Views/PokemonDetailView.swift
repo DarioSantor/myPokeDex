@@ -48,7 +48,6 @@ struct PokemonDetailView: View {
                         .bold()
                         .foregroundColor(.red)
                 }
-                .padding(.top)
                 .padding(.trailing)
                 VStack {
                     Text(String(pokemonDetailVM.weight))
@@ -58,9 +57,41 @@ struct PokemonDetailView: View {
                         .bold()
                         .foregroundColor(.red)
                 }
-                .padding(.top)
                 .padding(.leading)
             }
+            
+            HStack {
+                VStack {
+                    Text(String(pokemonDetailVM.stats[0].base_stat))
+                        .font(.title)
+                        .bold()
+                    Text("HP")
+                        .bold()
+                        .foregroundColor(.green)
+                }
+                .padding([.top, .trailing])
+
+                VStack {
+                    Text(String(pokemonDetailVM.stats[1].base_stat))
+                        .font(.title)
+                        .bold()
+                    Text("Attack")
+                        .bold()
+                        .foregroundColor(.blue)
+                }
+                .padding(.top)
+
+                VStack {
+                    Text(String(pokemonDetailVM.stats[2].base_stat))
+                        .font(.title)
+                        .bold()
+                    Text("Defense")
+                        .bold()
+                        .foregroundColor(.orange)
+                }
+                .padding([.top, .leading])
+            }
+            
         }
         .task {
             pokemonDetailVM.urlString = pokemon.url
